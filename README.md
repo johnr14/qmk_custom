@@ -1,19 +1,34 @@
 # qmk_custom
-My qmk bindings for my Keychron Q1
+My qmk bindings for my Keychron Q1.
+
+This is a WIP and to help me know where I am at in my customization.
 
 ## Info
 
-I don't want to remap layers on via, so I made all changes to the source code. That way, if I get an other QMK keyboard, it's going to be easy to use those configurations.
+I don't want to remap layers on via, so I made all changes to the source code. That way, if I get an other QMK keyboard, it's going to be easy to use those configurations. For it to work, **layer 0 must not be changed from default US layout**.
 
 Maximum number of layers is 16, so I will set it up that way.
 
-For easy reminder, you can press XXXX to launch image viewer of layer image. For it to work, put the images in ~/.qmk/layerimages/0-15.png
+For easy reminder, you can press XXXX to launch image viewer of layer image. For it to work, put the images in ~/.qmk/layerimages/keychron-q1_0-15.png
 
-Keyboard layout information : 
+### Keyboard layout information : 
 
-Minimal configuration :
+My keyboard image here.
+
+#### Minimal configuration :
 On the left of the space bar, the following keys are there : KC_LCTL, KC_LGUI, KC_LALT 
-On the right of the space bar, the following keys are there : KC_RALT, KC_APP, KC_
+
+On the right of the space bar, the following keys are there : KC_RALT, KC_APP, KC_RIGHT_CTRL
+
+Unused modifier : KC_RIGHT_GUI 
+
+On Keychron Q1 : Inverted L keys on top right starting from left then going down : KC_DOWN KC_INSERT KC_PRIOR KC_PAGE_DOWN KC_HOME
+
+Keys are have the following keycaps :  PRINTSC MENU INSERT PAGEUP PAGEDOWN
+
+## TODO
+1. Get navigation keys working
+2. 
 
 MOD-TAP :
 
@@ -21,9 +36,10 @@ CAPLOCK HOLD = toogle caplock layer
 BACKSPACE =   
 KC_LEFT_SHIFT KC_RIGHT_SHIFT = [Caps Word](https://docs.qmk.fm/#/feature_caps_word)
 
+
 TAP-DANCE :
 CAPLOCKS = 2 tap to toggle cap lock
-
+KC_LEFT_GUI = 1 tap and hold for KC_LEFT_GUI 
 
 
 Keyhold :
@@ -36,13 +52,24 @@ end =
 
 ## Keyboard layout
 
-### 0_base_us : qwerty
-### 1_base_ca : qwerty french
-
+### 0_base_us_ansi : qwerty
 
 ### 3_caplock
 
+ <details>
+  <summary>### _mouse</summary>
+### _mouse
+Not a priority, in backlog.
+
+Set backlight to red for virtual mouse while the layer is activated.
+
+Use **q-w-e-a-d-z-x-c** for mouvement, **s** or **1** for left click, **2** for middle click, **3** for right click and **KC_GRV** **`** to exit mouse mode.
+
+(smooth arrow)[https://www.reddit.com/r/olkb/comments/72u8ou/qmk_mouse_keys_rock/]
+</details>
+
 ### _keypad : keypad mode 
+        Set backlight to blue for virtual keypad while the layer is activated. 
         u=6 i=5 o=5 j=3 k=2 l=1 ,=0 ==+ 
 ### _media : multimedia macro
   - Multimedia
@@ -50,9 +77,12 @@ end =
   KC_KB
   ```
 ### _fxx : Function row macro
+  Hold KC_APP KC_RIGHT_CTRL
   ```
-  MT(KC_APP KC_RIGHT_CTRL, KC_F1) : KC_F13
+  KC_APP KC_RIGHT_CTRL KC_F1 : KC_F13
   ...
+  KC_APP KC_RIGHT_CTRL KC_0 : 
+  
   ```
 
 
@@ -60,16 +90,61 @@ end =
 ### _wm : window manager macro 
 ### _vi : vi mode style macro
 
-### 15_fn : function layer for keyboard management
-  - SAFE
+### _fn : Function row macro
+  Hold KC_APP KC_RIGHT_CTRL
   ```
-  KC_APP KC_ : layer_clear() # Clears all layers (turns them all off).
+  MT(, KC_F1) : KC_F13
+  ...
   ```
-  - Toogle
+
+### 14_fn
+Hold **KC_APP** while pressing a key 
+
+ - Toogle
   ```
         KC_APP KC_TAB : toogle rgb on/off
         KC_APP KC_KACKSLASH : KC_NUM_LOCK
   ```
+  
+  - Application
+  ```
+        KC_APP KC_SLASH : KC_KC_CALCULATOR
+        
+  ```
+  - Navigation
+  ```
+        KC_APP KC_UP   : KC_PAGE_UP
+        KC_APP KC_DOWN : KC_PAGE_DOWN
+        KC_APP KC_LEFT : KC_HOME
+        KC_APP KC_LEFT : KC_END
+        
+        MOD_MASK_SHIFT KC_PRINT_SCREEN : KC_PAUSE
+        ACTION_TAP_DANCE_DOUBLE(KC_DEL, KC_SCROOL_LOCK)
+        
+        # OVERWRITE KEYS IF Q1 is defined PRINTSC MENU INSERT PAGEUP PAGEDOWN
+        KC_DEL                          : KC_PRINT_SCREEN
+        KC_INSERT                       : KC_MENU
+        KC_PRIOR                        : KC_INSERT
+        KC_RIGHT_SHIFT KC_PAGE_DOWN     : KC_HOME
+        KC_RIGHT_SHIFT KC_HOME          : KC_END
+  ```
+  
+ 
+  
+  - QMK backlight
+  ```
+  
+  ```
+  
+
+### 15_super_fn : function layer for keyboard management
+To toogle layer hold **KC_RIGHT_GUI KC_APP KC_RIGHT_CTRL**
+
+  - SAFE
+  ```
+  KC_APP KC_ : layer_clear() # Clears all layers (turns them all off).
+  ```
+ 
   
   - [QMK](https://docs.qmk.fm/#/quantum_keycodes/)
   
@@ -80,28 +155,6 @@ end =
   : QK_DEBUG_TOOGLE # Toggle debug mode
   ```
   
-  - Application
-  ```
-        KC_APP KC_SLASH : KC_KC_CALCULATOR
-        
-  ```
-  - Navigation
-  ```
-        KC_APP KC_UP : KC_PAGE_UP
-        KC_APP KC_DOWN : KC_PAGE_DOWN
-        KC_APP KC_LEFT : KC_HOME
-        KC_APP KC_LEFT : KC_END
-  ```
-  
-  
-  - Commands utils
-  ```
-        KC_APP ____ : KC_PRINT_SCREEN
-        : KC_PAUSE
-        : KC_INSERT
-        : KC_CLEAR
-        : KC_
-  ```
   - Commands system
   ```
         KC_APP KC_ESC : KC_SYSTEM_SLEEP
@@ -132,3 +185,4 @@ end =
   References :
   [custom shift keys](https://getreuer.info/posts/keyboards/custom-shift-keys/index.html)
   [macros](https://getreuer.info/posts/keyboards/macros/index.html)
+  [layer lock](https://getreuer.info/posts/keyboards/layer-lock/index.html)
