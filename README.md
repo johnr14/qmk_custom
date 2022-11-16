@@ -1,6 +1,8 @@
 # qmk_custom
 My qmk bindings for my Keychron Q1.
 
+It's based on [VIAL](https://get.vial.today/).
+
 This is a WIP and to help me know where I am at in my customization.
 
 ## Info
@@ -30,11 +32,39 @@ Keys are have the following keycaps :  PRINTSC MENU INSERT PAGEUP PAGEDOWN
 1. Get navigation keys working
 2. 
 
+Key remapping using [overrides](https://docs.qmk.fm/#/feature_key_overrides) and not using layers
+
+  - Util
+  ```
+  KC_LEFT_SHIFT KC_CAPS_LOCK = [Caps Word](https://docs.qmk.fm/#/feature_caps_word)
+  ACTION_TAP_DANCE_DOUBLE(KC_CAPS_LOCKS, KC_HYPER) # Tap 1 and hold 2 time to use KC_HYPER 
+  ```
+
+  - Navigation
+  ```
+        KC_APP KC_UP   : KC_PAGE_UP
+        KC_APP KC_DOWN : KC_PAGE_DOWN
+        KC_APP KC_LEFT : KC_HOME
+        KC_APP KC_LEFT : KC_END
+        
+      
+        
+        # OVERWRITE KEYS IF Q1 is defined with following keycaps PRINTSC MENU INSERT PAGEUP PAGEDOWN
+        KC_DEL                          : KC_PRINT_SCREEN
+        MOD_MASK_SHIFT KC_DEL : KC_PAUSE
+        KC_INSERT                       : KC_MENU
+        KC_PRIOR                        : KC_INSERT
+        KC_RIGHT_SHIFT KC_PAGE_DOWN     : KC_HOME
+        KC_RIGHT_SHIFT KC_HOME          : KC_END
+          
+        ACTION_TAP_DANCE_DOUBLE(KC_DEL, KC_SCROOL_LOCK)
+  ```
+
 MOD-TAP :
 
 CAPLOCK HOLD = toogle caplock layer
 BACKSPACE =   
-KC_LEFT_SHIFT KC_RIGHT_SHIFT = [Caps Word](https://docs.qmk.fm/#/feature_caps_word)
+
 
 
 TAP-DANCE :
@@ -67,6 +97,9 @@ Use **q-w-e-a-d-z-x-c** for mouvement, **s** or **1** for left click, **2** for 
 
 (smooth arrow)[https://www.reddit.com/r/olkb/comments/72u8ou/qmk_mouse_keys_rock/]
 </details>
+
+### _left_arrows : wasd as arrows
+
 
 ### _keypad : keypad mode 
         Set backlight to blue for virtual keypad while the layer is activated. 
@@ -111,23 +144,7 @@ Hold **KC_APP** while pressing a key
         KC_APP KC_SLASH : KC_KC_CALCULATOR
         
   ```
-  - Navigation
-  ```
-        KC_APP KC_UP   : KC_PAGE_UP
-        KC_APP KC_DOWN : KC_PAGE_DOWN
-        KC_APP KC_LEFT : KC_HOME
-        KC_APP KC_LEFT : KC_END
-        
-        MOD_MASK_SHIFT KC_PRINT_SCREEN : KC_PAUSE
-        ACTION_TAP_DANCE_DOUBLE(KC_DEL, KC_SCROOL_LOCK)
-        
-        # OVERWRITE KEYS IF Q1 is defined PRINTSC MENU INSERT PAGEUP PAGEDOWN
-        KC_DEL                          : KC_PRINT_SCREEN
-        KC_INSERT                       : KC_MENU
-        KC_PRIOR                        : KC_INSERT
-        KC_RIGHT_SHIFT KC_PAGE_DOWN     : KC_HOME
-        KC_RIGHT_SHIFT KC_HOME          : KC_END
-  ```
+
   
  
   
