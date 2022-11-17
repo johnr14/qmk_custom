@@ -7,11 +7,9 @@ This is a WIP and to help me know where I am at in my customization.
 
 ## Info
 
-I don't want to remap layers on via, so I made all changes to the source code. That way, if I get an other QMK keyboard, it's going to be easy to use those configurations. For it to work, **layer 0 must not be changed from default US layout**.
+The MCU in Q1V1 is small awith limited MCU flash. My system is Linux, so no Mac/Win things.
 
-Maximum number of layers is 4 because the MCU in my version 1 is too small. And there is no choice other than disabling VIA and VIAL to be able to fit everything inside the limited MCU eeprom. This means that the GUI program will not work for quick configuration.
-
-For easy reminder, you can press XXXX to launch image viewer of layer image. For it to work, put the images in ~/.qmk/layerimages/keychron-q1_0-15.png
+TODO: For easy reminder, you can press XXXX to launch image viewer of layer image. For it to work, put the images in ~/.qmk/layerimages/keychron-q1_0-15.png
 
 ### Keyboard layout information : 
 
@@ -24,11 +22,13 @@ On the right of the space bar, the following keys are there : KC_RALT, KC_APP, K
 
 Unused modifier : KC_RIGHT_GUI 
 
-On Keychron Q1 : Inverted L keys on top right starting from left then going down : KC_DOWN KC_INSERT KC_PRIOR KC_PAGE_DOWN KC_HOME
+On Keychron Q1 : Inverted L keys on top right starting from left then going down : KC_DEL KC_INSERT KC_PRIOR KC_PAGE_DOWN KC_HOME
 
-Keys are have the following keycaps :  PRINTSC MENU INSERT PAGEUP PAGEDOWN
+Keys are have the following remap and keycaps :  KC_PRINT_SCREEN KC_MENU KC_INSERT KC_PAGE_UP KC_PAGE_DOWN [DONE]
 
 ## Build env
+I had trouble to setup on Fedora 36 so here is how I did it.
+
 `sudo dnf install git python3-pip`
 `python3 -m pip install --user qmk`
 `echo 'PATH="$HOME/.local/bin:$PATH"' >> $HOME/.bashrc && source $HOME/.bashrc`
@@ -42,42 +42,7 @@ pip install setuptools=57.5.0
 sudo dnf install libusb-devel systemd-devel
 
 
-## TODO
-1. Get navigation keys working
-2. 
 
-Key remapping using [overrides](https://docs.qmk.fm/#/feature_key_overrides) and not using layers
-
-  - Util
-  ```
-  KC_LEFT_SHIFT KC_CAPS_LOCK = [Caps Word](https://docs.qmk.fm/#/feature_caps_word)
-  ACTION_TAP_DANCE_DOUBLE(KC_CAPS_LOCKS, KC_HYPER) # Tap 1 and hold 2 time to use KC_HYPER 
-  ```
-
-  - Navigation
-  ```
-        KC_APP KC_UP   : KC_PAGE_UP
-        KC_APP KC_DOWN : KC_PAGE_DOWN
-        KC_APP KC_LEFT : KC_HOME
-        KC_APP KC_LEFT : KC_END
-        
-      
-        
-        # OVERWRITE KEYS IF Q1 is defined with following keycaps PRINTSC MENU INSERT PAGEUP PAGEDOWN
-        KC_DEL                          : KC_PRINT_SCREEN
-        MOD_MASK_SHIFT KC_DEL : KC_PAUSE
-        KC_INSERT                       : KC_MENU
-        KC_PRIOR                        : KC_INSERT
-        KC_RIGHT_SHIFT KC_PAGE_DOWN     : KC_HOME
-        KC_RIGHT_SHIFT KC_HOME          : KC_END
-          
-        ACTION_TAP_DANCE_DOUBLE(KC_DEL, KC_SCROOL_LOCK)
-  ```
-
-MOD-TAP :
-
-CAPLOCK HOLD = toogle caplock layer
-BACKSPACE =   
 
 
 
@@ -98,6 +63,59 @@ end =
 
 ### 0_base_us_ansi : qwerty
 
+### 1_NUM_FN : Calculator layer
+Pressing KC_APP | KC_SLASH toogle a numpad over the letters. TODO: RGB
+
+It disables all other layers
+
+### 2_K_FN : KDE specific layer
+Pressing KC_APP | KC_RSFT toogle kwin shortcuts TODO
+
+### 3_M_FN : Multimedia layer 
+Pressing KC_TAB FIXME
+
+### 4_NAV_FN : Navigation layer
+Pressing KC_APP | KC_ENTER toogle navigation layer
+
+Holding KC_CAPS momentarely enables navigation layer
+
+- FXX row get +12
+- Arrows are changed
+
+### 5_DMAC_FN : Dynamic macro record and play
+Pressing KC_APP | KC_MENU toogle macro layer
+
+- KC_PRINT_SCREEN : paste macro 1
+- KC_INSERT : record macro 1
+- KC_PGUP : record macro 2
+- KC_PGDN : paste macro 2
+- KC_MENU : finish recording macro
+
+### X_T_FN : Top layer function layer
+Pressing KC_APP momentarely enables function layer
+
+TODO: Keys
+
+### X_S_FN : System layer
+Pressing KC_APP | KC_RIGHT_CTRL wil momentarely enable system layer
+
+- KC_ESC : power off
+- KC_PGUP : wake
+- KC_PGDN : sleep
+- KC_PRINT_SCREEN : KC_SYRQ 
+
+
+## Special keys and combinations
+
+### Copy Cut Paste
+Just hold KC_C KC_X KC_V and it will add the KC_RIGHT_CTRL automaticaly.
+
+### CAP WORD
+KC_LEFT_SHIFT KC_RIGHT_SHIFT OR double tap KC_SHIFT = [Caps Word](https://docs.qmk.fm/#/feature_caps_word)
+
+
+## OLD
+
 ### 3_caplock
 
  <details>
@@ -115,9 +133,10 @@ Use **q-w-e-a-d-z-x-c** for mouvement, **s** or **1** for left click, **2** for 
 ### _left_arrows : wasd as arrows
 
 
-### _keypad : keypad mode 
+### _keypad : keypad mode [TO TEST]
         Set backlight to blue for virtual keypad while the layer is activated. 
         u=6 i=5 o=5 j=3 k=2 l=1 ,=0 ==+ 
+        
 ### _media : multimedia macro
   - Multimedia
   ```
@@ -129,6 +148,7 @@ Use **q-w-e-a-d-z-x-c** for mouvement, **s** or **1** for left click, **2** for 
   KC_APP KC_RIGHT_CTRL KC_F1 : KC_F13
   ...
   KC_APP KC_RIGHT_CTRL KC_0 : 
+  KC_APP KC_LS
   
   ```
 
@@ -155,7 +175,7 @@ Hold **KC_APP** while pressing a key
   
   - Application
   ```
-        KC_APP KC_SLASH : KC_KC_CALCULATOR
+        KC_APP KC_SLASH : KC_CALCULATOR
         
   ```
 
