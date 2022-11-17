@@ -7,7 +7,7 @@ This is a WIP and to help me know where I am at in my customization.
 
 ## Info
 
-The MCU in Q1V1 is small awith limited MCU flash. My system is Linux, so no Mac/Win things.
+The MCU in Q1V1 is small awith limited MCU flash. So only the 4 first layers can be dynamic and 4 more programmed in code. My system is Linux, so no Mac/Win things.
 
 TODO: For easy reminder, you can press XXXX to launch image viewer of layer image. For it to work, put the images in ~/.qmk/layerimages/keychron-q1_0-15.png
 
@@ -46,30 +46,27 @@ sudo dnf install libusb-devel systemd-devel
 
 
 
-TAP-DANCE :
-CAPLOCKS = 2 tap to toggle cap lock
-KC_LEFT_GUI = 1 tap and hold for KC_LEFT_GUI 
-
-
-Keyhold :
-FXX = FXX + 12
-
-
-del = SHIFT + BACKSPACE
-end =
-
-
 ## Keyboard layout
 
-### 0_base_us_ansi : qwerty
+### 0 L_BASE : qwerty
+Normal layer in US
 
-### 1_NUM_FN : Calculator layer
-Pressing KC_APP | KC_SLASH toogle a numpad over the letters. TODO: RGB
+### 1 D1_FN : Dynamic layer #1 for vial
+### 2 D2_FN : Dynamic layer #2 for vial
+### 3 D3_FN : Dynamic layer #3 for vial
 
-It disables all other layers
 
-### 2_K_FN : KDE specific layer
-Pressing KC_APP | KC_RSFT toogle kwin shortcuts TODO
+### 4 N_FN : Navigation and numpad layer
+Pressing KC_APP | KC_SLASH toogle a numpad over the letters. 
+
+Holding KC_CAPS momentarely enables navigation layer
+
+Status : WORK
+
+TODO: RGB
+TODO : disable all other incompatible layers
+
+
 
 ### 3_M_FN : Multimedia layer 
 Pressing KC_TAB FIXME
@@ -77,7 +74,7 @@ Pressing KC_TAB FIXME
 ### 4_NAV_FN : Navigation layer
 Pressing KC_APP | KC_ENTER toogle navigation layer
 
-Holding KC_CAPS momentarely enables navigation layer
+
 
 - FXX row get +12
 - Arrows are changed
@@ -91,12 +88,7 @@ Pressing KC_APP | KC_MENU toogle macro layer
 - KC_PGDN : paste macro 2
 - KC_MENU : finish recording macro
 
-### X_T_FN : Top layer function layer
-Pressing KC_APP momentarely enables function layer
-
-TODO: Keys
-
-### X_S_FN : System layer
+### 8 S_FN : System layer
 Pressing KC_APP | KC_RIGHT_CTRL wil momentarely enable system layer
 
 - KC_ESC : power off
@@ -112,6 +104,7 @@ Just hold KC_C KC_X KC_V and it will add the KC_RIGHT_CTRL automaticaly.
 
 ### CAP WORD
 KC_LEFT_SHIFT KC_RIGHT_SHIFT OR double tap KC_SHIFT = [Caps Word](https://docs.qmk.fm/#/feature_caps_word)
+
 
 
 ## OLD
