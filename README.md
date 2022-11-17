@@ -9,7 +9,7 @@ This is a WIP and to help me know where I am at in my customization.
 
 I don't want to remap layers on via, so I made all changes to the source code. That way, if I get an other QMK keyboard, it's going to be easy to use those configurations. For it to work, **layer 0 must not be changed from default US layout**.
 
-Maximum number of layers is 16, so I will set it up that way.
+Maximum number of layers is 4 because the MCU in my version 1 is too small. And there is no choice other than disabling VIA and VIAL to be able to fit everything inside the limited MCU eeprom. This means that the GUI program will not work for quick configuration.
 
 For easy reminder, you can press XXXX to launch image viewer of layer image. For it to work, put the images in ~/.qmk/layerimages/keychron-q1_0-15.png
 
@@ -27,6 +27,20 @@ Unused modifier : KC_RIGHT_GUI
 On Keychron Q1 : Inverted L keys on top right starting from left then going down : KC_DOWN KC_INSERT KC_PRIOR KC_PAGE_DOWN KC_HOME
 
 Keys are have the following keycaps :  PRINTSC MENU INSERT PAGEUP PAGEDOWN
+
+## Build env
+`sudo dnf install git python3-pip`
+`python3 -m pip install --user qmk`
+`echo 'PATH="$HOME/.local/bin:$PATH"' >> $HOME/.bashrc && source $HOME/.bashrc`
+
+## Build Q1 with vial support
+`make keychron/q1/rev_0100:vial`
+`make keychron/q1/rev_0100:vial:flash`
+
+### For vial-gui
+pip install setuptools=57.5.0
+sudo dnf install libusb-devel systemd-devel
+
 
 ## TODO
 1. Get navigation keys working
